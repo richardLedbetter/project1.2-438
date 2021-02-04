@@ -10,6 +10,30 @@ public class User {
 
     private static User instance;
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ArrayList<String> getCities() {
+        return cities;
+    }
+
+    public void setCities(ArrayList<String> cities) {
+        this.cities = cities;
+    }
+
     private User(String ID, String password){
         this.ID = ID;
         this.password = password;
