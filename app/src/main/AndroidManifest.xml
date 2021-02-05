@@ -12,6 +12,7 @@
         <activity android:name=".SavedCitiesActivity"></activity>
         <activity android:name=".CitySearchActivity" />
         <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".hub" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
