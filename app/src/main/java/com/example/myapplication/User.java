@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import androidx.room.Entity;
+
 import java.util.ArrayList;
 
 public class User {
@@ -9,6 +11,30 @@ public class User {
     public ArrayList<String> cities;
 
     private static User instance;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ArrayList<String> getCities() {
+        return cities;
+    }
+
+    public void setCities(ArrayList<String> cities) {
+        this.cities = cities;
+    }
 
     private User(String ID, String password){
         this.ID = ID;
