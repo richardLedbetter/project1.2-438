@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         tmp_user.userID = "admin";
         AtomicBoolean login_status = new AtomicBoolean(false);
         Runnable check = ()->{
-            local_inst.insert(tmp_user);
+            if (local_inst.findByUserName("admin")==null){
+                local_inst.insert(tmp_user);
+            }
             local_user.setID(ID.getText().toString());
             local_user.setPassword( Password.getText().toString());
             if(local_inst.login(local_user.getID(),local_user.getPassword())!=null){
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         T_database = new Thread(check);
         T_database.start();
         try {
-            T_database.wait();
+            T_database.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
