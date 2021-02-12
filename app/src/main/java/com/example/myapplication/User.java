@@ -60,6 +60,10 @@ public class User {
                 AppDatabase.class, "database-name").build();
     }
 
+    public static void RemoveInstance(){
+        instance = null;
+    }
+
     public static User getInstance(Context activity2){
         if(instance == null){
             instance = new User("defaultID","defaultpass",activity2);
