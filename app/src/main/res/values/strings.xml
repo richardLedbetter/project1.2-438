@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">My Application</string>
+
+    <!-- Strings used for activity navigation -->
+    <string name="city_search_activity">Search for a City</string>
+    <string name="saved_cities_activity">Saved Cities</string>
+    <string name="logout">Logout</string>
     <string name="title_activity_account_creation">AccountCreationActivity</string>
+
+    <!-- Strings used for activity_saved_cities -->
+    <string name="Remove_from_List">Remove from List</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

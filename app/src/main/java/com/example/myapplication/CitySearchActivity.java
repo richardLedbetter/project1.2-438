@@ -4,6 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+//Don't forget to uncomment the SingleCity
+
+
+
+
+
 
 //=============================================================================
 //This view will be for searching for/displaying cities.
@@ -25,6 +35,20 @@ public class CitySearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_search);
+
+        //==============================================
+        //This code is for testing purposes.
+        //==============================================
+        City city1 = new City("First City", 35);
+        City city2 = new City("Second City", 48);
+        City city3 = new City("Third City", 63);
+
+        List<City> cityList =  new ArrayList<City>();
+        cityList.add(city1);
+        cityList.add(city2);
+        cityList.add(city3);
+
+
     }
 }
 //=============================================================================
