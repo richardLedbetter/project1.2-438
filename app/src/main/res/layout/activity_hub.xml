@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".hub">
 
+    <Button
+        android:id="@+id/addcity"
+        android:layout_width="226dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="148dp"
+        android:text="Add City"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/favorites"
         android:layout_width="422dp"
@@ -19,9 +30,9 @@
         android:id="@+id/Logout"
         android:layout_width="226dp"
         android:layout_height="85dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginLeft="94dp"
-        android:layout_marginBottom="151dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginBottom="36dp"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
