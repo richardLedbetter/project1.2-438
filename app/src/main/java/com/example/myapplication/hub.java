@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -40,6 +41,14 @@ public class hub extends AppCompatActivity {
             User.RemoveInstance();
             finish();
         });
+        Button AddCity = findViewById(R.id.addcity);
+        AddCity.setOnClickListener(v1->{
+            add_city();
+        });
+    }
+    public void add_city(){
+        Intent intent = new Intent(this.getApplicationContext(),CitySearchActivity.class);
+        startActivity(intent);
     }
     public void load_user(){
         /*grab city names from api
