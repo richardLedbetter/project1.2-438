@@ -24,8 +24,6 @@ public class hub extends AppCompatActivity {
     User local_user;
     Button single_city_search;
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +42,7 @@ public class hub extends AppCompatActivity {
             User.RemoveInstance();
             finish();
         });
-        Button AddCity = findViewById(R.id.addcity);
-        AddCity.setOnClickListener(v1->{
-            add_city();
-        });
+
 
         single_city_search.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -57,9 +52,6 @@ public class hub extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     public void add_city(){
         Intent intent = new Intent(this.getApplicationContext(),CitySearchActivity.class);
