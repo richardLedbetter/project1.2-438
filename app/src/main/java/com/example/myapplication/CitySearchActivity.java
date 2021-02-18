@@ -41,6 +41,7 @@ public class CitySearchActivity extends AppCompatActivity {
     private TextView textViewResult;
     private Button searchButton;
     private EditText single_city;
+    SingleCity currCity; //this is an empty city obj; search will fill it; add will get data from it
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -61,6 +62,7 @@ public class CitySearchActivity extends AppCompatActivity {
        String apiKey = "sike"; //PUT API KEY HERE
        String unitsMeasure = "imperial";
 
+
        Call<SingleCity> call = weatherAPI.getSingleCityQuery(userCities,apiKey,unitsMeasure); //give IDs here
 
         call.enqueue(new Callback<SingleCity>() {
@@ -71,7 +73,7 @@ public class CitySearchActivity extends AppCompatActivity {
                     return;
                 }
 
-                SingleCity currCity = response.body();
+                currCity = response.body();
                 currCity.getCityID();
             }
 
