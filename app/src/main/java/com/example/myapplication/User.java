@@ -51,6 +51,7 @@ public class User {
         this.password = password;
         db = Room.databaseBuilder(activity ,
                 AppDatabase.class, "database-name").build();
+
     }
     private User(String ID, String password,Context activity2){
         this.ID = ID;
@@ -58,6 +59,7 @@ public class User {
         this.activity = activity2;
         db = Room.databaseBuilder(activity ,
                 AppDatabase.class, "database-name").build();
+        this.cities = new ArrayList<String>();
     }
 
     public static void RemoveInstance(){
