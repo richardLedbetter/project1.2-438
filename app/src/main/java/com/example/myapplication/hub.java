@@ -67,9 +67,12 @@ public class hub extends AppCompatActivity {
 
         database_interface local_inst = local_user.db.userDao();
         List<User_db> table =(local_inst.getAllCities(local_user.getID()));
-        for(User_db itr:table){
-            local_user.getCities().add(itr.city);
+        if (local_user.getCities().isEmpty()){
+            for(User_db itr:table){
+                local_user.getCities().add(itr.city);
+            }
         }
+
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void fill_table(){
