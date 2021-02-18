@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ public class CitySearchActivity extends AppCompatActivity {
     private TextView textViewResult;
     private Button searchButton;
     private EditText single_city;
+
     private SingleCity currCity; //global variable so search and add can access
     @SuppressLint("WrongViewCast")
     @Override
@@ -63,6 +65,7 @@ public class CitySearchActivity extends AppCompatActivity {
         Button Search = findViewById(R.id.Search);
         Search.setOnClickListener(v1->{
             Call<SingleCity> call = weatherAPI.getSingleCityQuery(single_city.getText().toString(),apiKey,unitsMeasure); //give IDs here
+
             call.enqueue(new Callback<SingleCity>() {
                 @Override
                 public void onResponse(Call<SingleCity> call, Response<SingleCity> response) {
@@ -87,12 +90,43 @@ public class CitySearchActivity extends AppCompatActivity {
 
         Button Add = findViewById(R.id.add);
         Add.setOnClickListener(v1->{
-            /*add city*/
-            //This is more of a design decision, but this may be redundent as there's an add
+           Runnable task1 = ()->{
+               try {
+                   add_city();
+               }catch (Exception e){
+                   Log.d("add","failed");
+                   e.printStackTrace();
+                   Log.d("add","failed");
+               }
+           };
+           Thread thread_1 = new Thread(task1);
+           thread_1.start();
             finish();
         });
+    }
+    public void add_city(){
+        User curr_user = User.getInstance(this.getApplicationContext());
+        User_db tmp_user = new User_db();
+        database_interface db = curr_user.db.userDao();
+        ArrayList<String> tmp = curr_user.getCities();
+        if(currCity==null){
+            Log.d("null","currCity");
+        }else if (tmp==null){
+            Log.d("null","tmp");
+        }
+        tmp.add(currCity.getCityID());
+        tmp_user.city = currCity.getCityID();
+        ArrayList counter = (ArrayList) db.getAll();
+        tmp_user.count = counter.size();
+        tmp_user.userID = curr_user.getID();
+        try{
+            Log.d("add","city");
+            db.insertAll(tmp_user);
+            Log.d("add","city");
+        }catch(Exception e){
+            Log.d("add","failed");
+        }
     }
 
 
 }
-//=============================================================================
