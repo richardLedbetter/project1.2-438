@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -96,8 +97,19 @@ public class CitySearchActivity extends AppCompatActivity {
 
         Button Add = findViewById(R.id.add);
         Add.setOnClickListener(v1->{
-            /*add city*/
-            //This is more of a design decision, but this may be redundent as there's an add
+            User curr_user = User.getInstance(this.getApplicationContext());
+            User_db tmp_user = new User_db();
+            database_interface db = curr_user.db.userDao();
+            curr_user.getCities().add("city");
+            tmp_user.city = "cityid";
+            ArrayList counter = (ArrayList) db.getAll();
+            tmp_user.count = counter.size();
+            tmp_user.userID = curr_user.getID();
+            try{
+                db.insertAll(tmp_user);
+            }catch(Exception e){
+
+            }
             finish();
         });
     }
