@@ -3,10 +3,11 @@ package com.example.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -21,6 +22,7 @@ public class hub extends AppCompatActivity {
     LinearLayout ll;
     AppDatabase db;
     User local_user;
+    Button single_city_search;
 
 
 
@@ -29,6 +31,7 @@ public class hub extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
+        single_city_search =findViewById(R.id.singleSearch);
         local_user = User.getInstance(this.getApplicationContext());
         Runnable task1 = ()->{
             load_user();
@@ -45,7 +48,19 @@ public class hub extends AppCompatActivity {
         AddCity.setOnClickListener(v1->{
             add_city();
         });
+
+        single_city_search.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(hub.this, CitySearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
+
     public void add_city(){
         Intent intent = new Intent(this.getApplicationContext(),CitySearchActivity.class);
         startActivity(intent);

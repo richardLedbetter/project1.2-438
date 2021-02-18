@@ -46,7 +46,7 @@ public class User {
         this.cities = cities;
     }
 
-    private User(String ID, String password){
+    public User(String ID, String password){
         this.ID = ID;
         this.password = password;
         db = Room.databaseBuilder(activity ,

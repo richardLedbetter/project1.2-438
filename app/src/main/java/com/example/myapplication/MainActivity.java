@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     AppDatabase db;
     User local_user;
     Thread T_database;
+    //EditText mainUsername;
+    //EditText mainPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this.getApplication(),hub.class);
                 startActivity(intent);
             }
+        });
+
+        Button SignUp = findViewById(R.id.signUp);
+        SignUp.setOnClickListener(v1->{
+            Intent intent = new Intent(this.getApplicationContext(), CreateAccountActivity.class);
+            startActivity(intent);
         });
 
 
