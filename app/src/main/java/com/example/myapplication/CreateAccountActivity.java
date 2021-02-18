@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,26 +50,22 @@ public class CreateAccountActivity extends AppCompatActivity {
         create_account_username = findViewById(R.id.CAID);
         create_account_password = findViewById(R.id.CAPassword);
         create_account_signup = findViewById(R.id.CASignUp);
-        local_user =  User.getInstance(this.getApplicationContext());
+        local_user = User.getInstance(this.getApplicationContext());
 
         System.out.println(local_user.ID);
         System.out.println(create_account_username.getText().toString());
         System.out.println(create_account_password.getText().toString());
 
 
-
-
         create_account_signup.setOnClickListener(v1 -> {
             local_user.ID = create_account_username.getText().toString();
             local_user.password = create_account_password.getText().toString();
-           try{
-               signUp();
-           }catch(Exception e){
-               //user already exist
+            try {
+                signUp();
+            } catch (Exception e) {
+                //user already exist
             }
-
         });
-
     }
 
     public void signUp() {
@@ -88,6 +86,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         };
         T_database = new Thread(check);
         T_database.start();
+        Looper.prepare();
         try {
             T_database.join();
         } catch (Exception e) {

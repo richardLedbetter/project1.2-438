@@ -45,7 +45,7 @@
         android:id="@+id/text_view_result"
         android:layout_width="315dp"
         android:layout_height="136dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
