@@ -61,31 +61,22 @@ public class CitySearchActivity extends AppCompatActivity {
        String apiKey = "sike"; //PUT API KEY HERE
        String unitsMeasure = "imperial";
 
-       Call<CityList> call = weatherAPI.getUserCitiesQuery(userCities,apiKey,unitsMeasure); //give IDs here
+       Call<SingleCity> call = weatherAPI.getSingleCityQuery(userCities,apiKey,unitsMeasure); //give IDs here
 
-        call.enqueue(new Callback<CityList>() {
+        call.enqueue(new Callback<SingleCity>() {
             @Override
-            public void onResponse(Call<CityList> call, Response<CityList> response) {
+            public void onResponse(Call<SingleCity> call, Response<SingleCity> response) {
                 if (!response.isSuccessful()) {
                     textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
-                CityList cities = response.body();
-                List<SingleCity> temp = cities.getList();
-
-                for (SingleCity city: temp){
-                    String content = "";
-                    content += "ID: " + city.getCityID() + "\n";
-                    content += "Name: " + city.getCityName() + "\n";
-                    content += "Temp: " + city.getMainTemperture() + "\n";
-
-                    textViewResult.append(content);
-                }
+                SingleCity currCity = response.body();
+                currCity.getCityID();
             }
 
             @Override
-            public void onFailure(Call<CityList> call, Throwable t) {
+            public void onFailure(Call<SingleCity> call, Throwable t) {
                 textViewResult.setText(t.getMessage());
             }
         });
