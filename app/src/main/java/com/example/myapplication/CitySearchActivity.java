@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,10 +42,8 @@ public class CitySearchActivity extends AppCompatActivity {
     private TextView textViewResult;
     private Button searchButton;
     private EditText single_city;
-    SingleCity currCity; //this is an empty city obj; search will fill it; add will get data from it
-    Call<SingleCity> call;
-    String apiKey = "d0355916b97057129ebc1ceb5327cd68";
 
+    private SingleCity currCity; //global variable so search and add can access
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,35 +59,13 @@ public class CitySearchActivity extends AppCompatActivity {
                 .build();
         WeatherApi weatherAPI = retrofit.create(WeatherApi.class);
 
-        String userCities = "524901,703448,2643743";
-        //String apiKey = "540c3fa023f7aa3ee8314f9fd1f6a425"; //PUT API KEY HERE
-        String unitsMeasure = "imperial";
-
-
-        call = weatherAPI.getSingleCityQuery(userCities,apiKey,unitsMeasure); //give IDs here
-
-        call.enqueue(new Callback<SingleCity>() {
-            @Override
-            public void onResponse(Call<SingleCity> call, Response<SingleCity> response) {
-                if (!response.isSuccessful()) {
-                    textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
-                currCity = response.body();
-                currCity.getCityID();
-            }
-
-            @Override
-            public void onFailure(Call<SingleCity> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
-            }
-        });
+       String apiKey = "d0355916b97057129ebc1ceb5327cd68"; //PUT API KEY HERE
+       String unitsMeasure = "imperial";
 
         Button Search = findViewById(R.id.Search);
         Search.setOnClickListener(v1->{
+            Call<SingleCity> call = weatherAPI.getSingleCityQuery(single_city.getText().toString(),apiKey,unitsMeasure); //give IDs here
 
-            call = weatherAPI.getSingleCityQuery(single_city.getText().toString(),apiKey,unitsMeasure);
             call.enqueue(new Callback<SingleCity>() {
                 @Override
                 public void onResponse(Call<SingleCity> call, Response<SingleCity> response) {
@@ -98,26 +73,19 @@ public class CitySearchActivity extends AppCompatActivity {
                         textViewResult.setText("Code: " + response.code());
                         return;
                     }
-
                     currCity = response.body();
-                    currCity.getCityID();
-                    textViewResult.setText(currCity.getCityID());
+//                    currCity.getCityID();
+                    String content = "";
+                    content += "Name: "+currCity.getCityName()+"\n";
+                    content += "ID: "+currCity.getCityID()+"\n";
+                    content += "Temp: "+currCity.getMainTemperture()+"\n\n";
+                    textViewResult.append(content);
                 }
-
                 @Override
                 public void onFailure(Call<SingleCity> call, Throwable t) {
                     textViewResult.setText(t.getMessage());
                 }
             });
-
-            // cityName = "524901,703448,2643743";
-            //I feel that usercities should be swapped for a cityNames variable, like in the example above
-
-            //String apiKey = "540c3fa023f7aa3ee8314f9fd1f6a425"; //PUT API KEY HERE
-           // String unitsMeasure = "imperial";
-
-           // Call<CityList> call = weatherAPI.getUserCitiesQuery(userCities,apiKey,unitsMeasure); //give IDs here
-
         });
 
         Button Add = findViewById(R.id.add);
@@ -162,4 +130,3 @@ public class CitySearchActivity extends AppCompatActivity {
 
 
 }
-//=============================================================================
