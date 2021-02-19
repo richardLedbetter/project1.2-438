@@ -18,7 +18,7 @@ public interface database_interface {
     @Query("SELECT * FROM user_db WHERE count IN (:counts)")
     List<User_db> loadAllByIds(int[] counts);
 
-    @Query("SELECT * FROM user_db WHERE userID LIKE :userID LIKE :userID LIMIT 1")
+    @Query("SELECT * FROM user_db WHERE userID LIKE :userID LIMIT 1")
     User_db findByName(String userID);
 
     @Query("SELECT * FROM User_db_Login WHERE userID LIKE :userID LIMIT 1")
@@ -35,4 +35,7 @@ public interface database_interface {
 
     @Delete
     void delete(User_db user_db);
+
+    @Delete
+    void delete(User_db_Login user_db_login);
 }
