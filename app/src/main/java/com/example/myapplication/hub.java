@@ -63,6 +63,18 @@ public class hub extends AppCompatActivity {
             User.RemoveInstance();
             finish();
         });
+        Button removeUser = findViewById(R.id.RemoveUser);
+
+        if (local_user.getID().equals("admin")){
+            removeUser.setVisibility(View.VISIBLE);
+            removeUser.setOnClickListener(v1->{
+                Intent intent = new Intent(this.getApplicationContext(),Removeuser.class);
+                startActivity(intent);
+            });
+
+        }else{
+
+        }
 
 
         single_city_search.setOnClickListener(new View.OnClickListener(){
