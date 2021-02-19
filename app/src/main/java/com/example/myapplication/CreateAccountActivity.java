@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     EditText create_account_username;
     EditText create_account_password;
     Button create_account_signup;
+    Button returnButton;
     AppDatabase db;
 
 
@@ -51,6 +54,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         create_account_password = findViewById(R.id.CAPassword);
         create_account_signup = findViewById(R.id.CASignUp);
         local_user = User.getInstance(this.getApplicationContext());
+        returnButton = (Button)findViewById(R.id.CAReturnHome);
 
         System.out.println(local_user.ID);
         System.out.println(create_account_username.getText().toString());
@@ -64,6 +68,14 @@ public class CreateAccountActivity extends AppCompatActivity {
                 signUp();
             } catch (Exception e) {
                 //user already exist
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
