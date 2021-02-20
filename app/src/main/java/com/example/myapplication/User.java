@@ -63,9 +63,7 @@ public class User {
     }
 
     public void RemoveInstance(){
-        instance = null;
         this.cities.clear();
-
     }
 
     public static User getInstance(Context activity2){
