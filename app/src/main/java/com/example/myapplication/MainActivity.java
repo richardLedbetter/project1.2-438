@@ -12,11 +12,18 @@ import android.widget.EditText;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends AppCompatActivity {
-    AppDatabase db;
+    AppDatabase db; // database access object
     User local_user;
+    /*
+    * user instance for database access
+    * as well as cities
+    * and user information such as username
+    * */
     Thread T_database;
-    //EditText mainUsername;
-    //EditText mainPassword;
+    /*
+    * Thread for accessing the database to not stop UI thread
+    * */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private boolean log_in(){
+        /*
+        * check's to see if use exist
+        * */
+        //getting database instance
         database_interface local_inst = local_user.db.userDao();
+
+
+        //getting entered text
         EditText ID = findViewById(R.id.ID);
         EditText Password = findViewById(R.id.Password);
         User_db_Login tmp_user = new User_db_Login();
+        //default admin password
         tmp_user.password = "password";
         tmp_user.userID = "admin";
+        //
         AtomicBoolean login_status = new AtomicBoolean(false);
         Runnable check = ()->{
             if (local_inst.findByUserName("admin")==null){
