@@ -15,11 +15,6 @@ public interface database_interface {
     @Query("SELECT * FROM User_db WHERE userID = :userID")
     List<User_db> getAllCities(String userID);
 
-    @Query("SELECT * FROM user_db WHERE count IN (:counts)")
-    List<User_db> loadAllByIds(int[] counts);
-
-    @Query("SELECT * FROM user_db WHERE userID LIKE :userID LIMIT 1")
-    User_db findByName(String userID);
 
     @Query("SELECT * FROM User_db_Login WHERE userID LIKE :userID LIMIT 1")
     User_db_Login findByUserName(String userID);
@@ -27,15 +22,15 @@ public interface database_interface {
     @Query("SELECT * FROM user_db_login WHERE userID LIKE :userID AND password Like :password LIMIT 1")
     User_db_Login login(String userID,String password);
 
-    @Insert
+    @Insert//insert city
     void insertAll(User_db users);
 
-    @Insert
+    @Insert//insert user
     void insert (User_db_Login user_db);
 
-    @Delete
+    @Delete//delete user city
     void delete(User_db user_db);
 
-    @Delete
+    @Delete//delete user
     void delete(User_db_Login user_db_login);
 }
