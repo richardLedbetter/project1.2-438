@@ -87,22 +87,24 @@ public class hub extends AppCompatActivity {
         });
     }
 
-    public void add_city(){
-        Intent intent = new Intent(this.getApplicationContext(),CitySearchActivity.class);
-        startActivity(intent);
-    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void load_user(){
         /*grab city names from api
         * fill user table
         *
         * */
+        Log.d("Ran user", "load_user: ");
         local_user.getCities().clear();
         database_interface local_inst = local_user.db.userDao();
         List<User_db> table =(local_inst.getAllCities(local_user.getID()));
         if (local_user.getCities().isEmpty()){
+            Log.d("USER:","is empty");
             for(User_db itr:table){
-                local_user.getCities().add(itr.city);
+                if(itr.userID.equals(local_user.ID)){
+                    Log.d("USER:",itr.userID);
+                    local_user.getCities().add(itr.city);
+                }
+
             }
         }
         String builder ="";
@@ -121,7 +123,7 @@ public class hub extends AppCompatActivity {
         String apiKey = "d0355916b97057129ebc1ceb5327cd68"; //PUT API KEY HERE
         String unitsMeasure = "imperial";
 
-        Button Search = findViewById(R.id.Search);
+
             Call<CityList> call = weatherAPI.getUserCitiesQuery(builder,apiKey,unitsMeasure); //give IDs here
 
              Context screen = this.getApplicationContext();
