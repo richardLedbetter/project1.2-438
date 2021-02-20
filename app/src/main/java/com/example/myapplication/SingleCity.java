@@ -9,6 +9,8 @@ import com.google.gson.annotations.SerializedName;
 import java.lang.reflect.Type;
 
 public class SingleCity {
+    // object that represents a single city
+
     @SerializedName("name")
     private String cityName;
 
@@ -19,7 +21,7 @@ public class SingleCity {
     @JsonAdapter(mainTempDeserializer.class)
     private String mainTemperture;
 
-    //handles json objects
+    //handles getting data from nested json objects
     public static class mainTempDeserializer implements JsonDeserializer<String> {
         @Override
         public String deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
