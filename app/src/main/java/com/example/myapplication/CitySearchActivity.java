@@ -109,22 +109,24 @@ public class CitySearchActivity extends AppCompatActivity {
         User curr_user = User.getInstance(this.getApplicationContext());
         User_db tmp_user = new User_db();
         database_interface db = curr_user.db.userDao();
-        ArrayList<String> tmp = curr_user.getCities();
-        if(currCity==null){
+        //ArrayList<String> tmp = curr_user.getCities();
+       /* if(currCity==null){
             Log.d("null","currCity");
         }else if (tmp==null){
             Log.d("null","tmp");
         }
-        tmp.add(currCity.getCityID());
+        tmp.add(currCity.getCityID());*/
+        //tmp_user.getCities().add(currCity.getCityID());
         tmp_user.city = currCity.getCityID();
-        ArrayList counter = (ArrayList) db.getAll();
-        tmp_user.count = counter.size();
+        ArrayList<User_db> counter = (ArrayList) db.getAll();
+        tmp_user.count = counter.get(counter.size()-1).count + 1;
         tmp_user.userID = curr_user.getID();
         try{
-            Log.d("add","city");
+            Log.d("add",tmp_user.city);
             db.insertAll(tmp_user);
             Log.d("add","city");
         }catch(Exception e){
+            e.printStackTrace();
             Log.d("add","failed");
         }
     }

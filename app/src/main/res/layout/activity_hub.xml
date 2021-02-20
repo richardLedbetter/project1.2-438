@@ -7,18 +7,6 @@
     tools:context=".hub">
 
 
-
-    <LinearLayout
-        android:id="@+id/favorites"
-        android:layout_width="382dp"
-        android:layout_height="268dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068"></LinearLayout>
-
     <Button
         android:id="@+id/Logout"
         android:layout_width="226dp"
@@ -47,11 +35,38 @@
         android:id="@+id/RemoveUser"
         android:layout_width="176dp"
         android:layout_height="55dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginLeft="126dp"
         android:layout_marginBottom="52dp"
         android:text="Remove User"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="507dp"
+            android:layout_height="408dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="54dp"
+            android:layout_marginRight="54dp"
+            android:layout_marginBottom="513dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/favorites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

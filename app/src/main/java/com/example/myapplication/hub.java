@@ -31,6 +31,7 @@ public class hub extends AppCompatActivity {
     User local_user;
     Button single_city_search;
     CityList currCityList;
+    ArrayList<Integer> databaseCityCount = new ArrayList<Integer>();
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -60,7 +61,7 @@ public class hub extends AppCompatActivity {
         loader.start();
         Button Logout = findViewById(R.id.Logout);
         Logout.setOnClickListener(v1->{
-            User.RemoveInstance();
+            local_user.RemoveInstance();
             finish();
         });
         Button removeUser = findViewById(R.id.RemoveUser);
@@ -73,7 +74,7 @@ public class hub extends AppCompatActivity {
             });
 
         }else{
-
+            removeUser.setVisibility(View.GONE);
         }
 
 
@@ -96,7 +97,7 @@ public class hub extends AppCompatActivity {
         * fill user table
         *
         * */
-
+        local_user.getCities().clear();
         database_interface local_inst = local_user.db.userDao();
         List<User_db> table =(local_inst.getAllCities(local_user.getID()));
         if (local_user.getCities().isEmpty()){
@@ -106,7 +107,10 @@ public class hub extends AppCompatActivity {
         }
         String builder ="";
         for (String itr:local_user.getCities()){
-            builder = builder+itr+",";
+            builder = builder+itr+","; Log.d("building", itr);
+        }
+        for(User_db itr:table){
+            databaseCityCount.add(itr.count);
         }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.openweathermap.org/data/2.5/")
@@ -147,15 +151,36 @@ public class hub extends AppCompatActivity {
     public void fill_table(){
 
         LinearLayout ll = findViewById(R.id.favorites);
+        ll.removeAllViews();
+
         try {
             for (SingleCity itr : currCityList.getList()) {
                 Runnable R = () -> {
                     TextView t = new TextView(this);
+                    Button deleteFavCity = new Button(this);
+
                     String c = itr.getCityName()+'\n'+itr.getMainTemperture()+'\n';
                     Log.d("city",c);
                     t.setText(c);
                     t.setTextAlignment(t.TEXT_ALIGNMENT_CENTER);
+                    deleteFavCity.setText("Remove");
                     ll.addView(t);
+                    ll.addView(deleteFavCity);
+                    deleteFavCity.setOnClickListener(v1->{
+                        Thread task1 = new Thread(()->{
+                            database_interface db = local_user.db.userDao();
+                            User_db tmp = new User_db();
+                            tmp.userID = local_user.getID();
+                            tmp.count = databaseCityCount.get((t.getId())/2);
+                            tmp.city = itr.getCityID();
+
+                            runOnUiThread(()->{ll.removeView(t);
+                                ll.removeView(deleteFavCity);});
+
+                            db.delete(tmp);
+                        });
+                        task1.start();
+                    });
                 };
                 runOnUiThread(R);
             }

@@ -12,7 +12,7 @@ public interface database_interface {
     @Query("SELECT * FROM User_db")
     List<User_db> getAll();
 
-    @Query("SELECT * FROM User_db WHERE userID LIKE :userID")
+    @Query("SELECT * FROM User_db WHERE userID = :userID")
     List<User_db> getAllCities(String userID);
 
     @Query("SELECT * FROM user_db WHERE count IN (:counts)")
@@ -28,7 +28,7 @@ public interface database_interface {
     User_db_Login login(String userID,String password);
 
     @Insert
-    void insertAll(User_db... users);
+    void insertAll(User_db users);
 
     @Insert
     void insert (User_db_Login user_db);
