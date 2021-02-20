@@ -8,8 +8,13 @@ import androidx.room.Room;
 import java.util.ArrayList;
 import java.util.List;
 
+//===============================================================================================
+//User class
+//===============================================================================================
 public class User {
+    //----------------------------------
     //Singleton
+    //----------------------------------
     public String ID;
     public String password;
     public ArrayList<String> cities;
@@ -17,9 +22,11 @@ public class User {
     private Context activity;
 
     private static User instance;
+    //----------------------------------
 
-
+    //--------------------------------------------------------------------
     //getters and setters
+    //--------------------------------------------------------------------
     public String getID() {
         return ID;
     }
@@ -46,8 +53,11 @@ public class User {
         }
         return instance;
     }
+    //--------------------------------------------------------------------
 
+    //-----------------------------------------------------------
     //constructor
+    //-----------------------------------------------------------
     private User(String ID, String password,Context activity2){
         this.ID = ID;
         this.password = password;
@@ -56,12 +66,14 @@ public class User {
                 AppDatabase.class, "database-name").build();
         this.cities = new ArrayList<String>();
     }
+    //-----------------------------------------------------------
+
+    //-------------------------------
     //clear out past user
+    //-------------------------------
     public void RemoveInstance(){
         this.cities.clear();
     }
-
-
-
-
+    //-------------------------------
 }
+//===============================================================================================

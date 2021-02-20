@@ -2,8 +2,11 @@ package com.example.myapplication;
 
 import java.util.List;
 
+//==============================================================
+//CityList class: Objects represent multiple SingleCity objects.
+//==============================================================
 public class CityList {
-    //object that represents multiple SingleCity objects
+
     private String cnt;
 
     private List<SingleCity> list;
@@ -16,3 +19,5 @@ public class CityList {
         return list;
     }
 }
+//==============================================================
+

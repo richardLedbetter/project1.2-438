@@ -23,8 +23,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+//====================================================================================================================================================
+//hub class
+//====================================================================================================================================================
 public class hub extends AppCompatActivity {
 
+    //=================================================================
+    //Variables
+    //=================================================================
     ScrollView sc;
     LinearLayout ll;
     AppDatabase db;
@@ -32,7 +38,11 @@ public class hub extends AppCompatActivity {
     Button single_city_search;
     CityList currCityList;
     ArrayList<Integer> databaseCityCount = new ArrayList<Integer>();
+    //=================================================================
 
+    //========================================================
+    //onResume
+    //========================================================
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onResume(){
@@ -44,11 +54,18 @@ public class hub extends AppCompatActivity {
         Thread loader = new Thread(task1);
         loader.start();
     }
+    //========================================================
 
+    //======================================================================================================
+    //onCreate
+    //======================================================================================================
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //------------------------------------------------------------
+        //Components
+        //------------------------------------------------------------
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
         single_city_search =findViewById(R.id.singleSearch);
@@ -64,8 +81,16 @@ public class hub extends AppCompatActivity {
             local_user.RemoveInstance();
             finish();
         });
+        //------------------------------------------------------------
+
+        //=====================================================================================
+        //removeUser Button(only appears for admin account
+        //=====================================================================================
         Button removeUser = findViewById(R.id.RemoveUser);
 
+        //---------------------------------------------------------------------------------
+        //show button only if admin is logged in. else delete it.
+        //---------------------------------------------------------------------------------
         if (local_user.getID().equals("admin")){
             removeUser.setVisibility(View.VISIBLE);
             removeUser.setOnClickListener(v1->{
@@ -76,8 +101,11 @@ public class hub extends AppCompatActivity {
         }else{
             removeUser.setVisibility(View.GONE);
         }
+        //---------------------------------------------------------------------------------
 
-
+        //===================================================================================
+        //single_city_search.setOnClickListener: takes user to city search activity.
+        //===================================================================================
         single_city_search.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -85,8 +113,12 @@ public class hub extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //===================================================================================
     }
-
+    //======================================================================================================
+    //===================================================================================================================
+    //load_user
+    //===================================================================================================================
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void load_user(){
         /*grab city names from api
@@ -148,7 +180,11 @@ public class hub extends AppCompatActivity {
             });
 
         }
+    //================================================================================================================================
 
+    //===========================================================================================
+    //fill_table()
+    //===========================================================================================
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void fill_table(){
 
@@ -198,4 +234,5 @@ public class hub extends AppCompatActivity {
         }
 
     }
+    //====================================================================================================================================================
 }

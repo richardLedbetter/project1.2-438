@@ -8,9 +8,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Type;
 
+//===========================================================================================================
+//Single City: Object that represents a single city
+//===========================================================================================================
 public class SingleCity {
-    // object that represents a single city
 
+    //--------------------------------------------
+    //Variables
+    //--------------------------------------------
     @SerializedName("name")
     private String cityName;
 
@@ -20,15 +25,22 @@ public class SingleCity {
     @SerializedName("main")
     @JsonAdapter(mainTempDeserializer.class)
     private String mainTemperture;
+    //--------------------------------------------
 
-    //handles getting data from nested json objects
+    //-------------------------------------------------------------------------------------------------------
+    //mainTempDeserializer(): Handles getting data from nested json objects
+    //-------------------------------------------------------------------------------------------------------
     public static class mainTempDeserializer implements JsonDeserializer<String> {
         @Override
         public String deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
             return json.getAsJsonObject().get("temp").getAsString();
         }
     }
+    //-------------------------------------------------------------------------------------------------------
 
+    //-----------------------------------------------
+    //Getters
+    //-----------------------------------------------
     public String getCityName() {
         return cityName;
     }
@@ -40,4 +52,6 @@ public class SingleCity {
     public String getCityID() {
         return cityID;
     }
+    //-----------------------------------------------
 }
+//===========================================================================================================
